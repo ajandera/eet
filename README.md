@@ -1,7 +1,7 @@
 # PHP Client for EET
 
 [![Downloads this Month](https://img.shields.io/packagist/dm/ajandera/eet.svg)](https://packagist.org/packages/ajandera/eet)
-[![Latest stable](https://img.shields.io/packagist/v/ajandera/eet.svg)](https://packagist.org/packages/ajander/eet)
+[![Latest stable](https://img.shields.io/packagist/v/ajandera/eet.svg)](https://packagist.org/packages/ajandera/eet)
 
 ## Installation
 Install ajandera/eet using  [Composer](http://getcomposer.org/):
