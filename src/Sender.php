@@ -68,11 +68,11 @@ class Sender {
      * @param Receipt $receipt
      * @return boolean|string
      */
-    public function sendReceipt(Receipt $receipt) {
+    public function check(Receipt $receipt) {
         try {
             return $this->proceedSend($receipt, true);
         } catch (ServerException $e) {
-            return $e->getMessage();
+            return $e;
         }
     }
 

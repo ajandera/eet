@@ -45,20 +45,20 @@ class TestSender extends TestCase {
      * Test send correct.
      */
     public function testSend() {
-        $fik = $this->getSender()->sendReceipt($this->getReceipt());
+        $fik = $this->getSender()->proceedSend($this->getReceipt());
         Assert::type('string', $fik);
     }
 
     /**
      * Test send error.
      */
-    /*public function testSendError() {
+    public function testSendError() {
         $receipt = $this->getReceipt();
         $receipt->dic_popl = 'x';
         Assert::exception(function() use ($receipt) {
-            $this->getSender()->sendReceipt($receipt);
+            $this->getSender()->proceedSend($receipt);
         }, ServerException::class);
-    }*/
+    }
 
     /**
      * Test get connection time.
@@ -66,7 +66,7 @@ class TestSender extends TestCase {
     public function testGetConnectionTime() {
         $sender = $this->getSender();
         $sender->trace = true;
-        $sender->sendReceipt($this->getReceipt());
+        $sender->proceedSend($this->getReceipt());
         $time = $sender->getConnectionTime();
         Assert::type('float', $time);
         Assert::true($time > 0);
@@ -78,7 +78,7 @@ class TestSender extends TestCase {
     public function testGetConnectionTimeTillLastRequest() {
         $sender = $this->getSender();
         $sender->trace = true;
-        $sender->sendReceipt($this->getReceipt());
+        $sender->proceedSend($this->getReceipt());
         $time = $sender->getConnectionTime(true);
         Assert::type('float', $time);
         Assert::true($time > 0);
@@ -90,7 +90,7 @@ class TestSender extends TestCase {
     public function testGetLastResponseTime() {
         $sender = $this->getSender();
         $sender->trace = true;
-        $sender->sendReceipt($this->getReceipt());
+        $sender->proceedSend($this->getReceipt());
         $time = $sender->getLastResponseTime();
         Assert::type('float', $time);
         Assert::true($time > 0);
@@ -102,7 +102,7 @@ class TestSender extends TestCase {
     public function testGetLastRequestSize() {
         $sender = $this->getSender();
         $sender->trace = true;
-        $sender->sendReceipt($this->getReceipt());
+        $sender->proceedSend($this->getReceipt());
         $size = $sender->getLastRequestSize();
         Assert::type('int', $size);
         Assert::true($size > 0);
@@ -114,7 +114,7 @@ class TestSender extends TestCase {
     public function testGetLastResponseSize() {
         $sender = $this->getSender();
         $sender->trace = true;
-        $sender->sendReceipt($this->getReceipt());
+        $sender->proceedSend($this->getReceipt());
         $size = $sender->getLastResponseSize();
         Assert::type('int', $size);
         Assert::true($size > 0);
@@ -125,7 +125,7 @@ class TestSender extends TestCase {
      */
     public function testTraceNotEnabled() {
         $sender = $this->getSender();
-        $sender->sendReceipt($this->getReceipt());
+        $sender->proceedSend($this->getReceipt());
         Assert::exception(function() use ($sender) {
             $sender->getLastResponseSize();
         }, ClientException::class);
