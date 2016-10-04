@@ -236,7 +236,7 @@ class Sender {
 
         return $this->getSoapClient()->OdeslaniTrzby([
                 'Hlavicka' => $head,
-                'Datya' => $body,
+                'Data' => $body,
                 'KontrolniKody' => $this->getCheckCodes($receipt)
             ]
         );

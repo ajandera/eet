@@ -1,4 +1,5 @@
-.idea/eet.iml
-.idea/modules.xml
-.idea/workspace.xml
 tester/
+.idea
+.DS_Store
+composer.lock
+vendor/

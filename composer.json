@@ -2,11 +2,18 @@
     "name": "ajandera/eet",
     "description": "PHP Client for EET",
     "type": "library",
-    "license": ["MIT", "BSD-3-Clause", "GPL-2.0", "GPL-3.0"],
+    "license": [
+        "MIT",
+        "BSD-3-Clause",
+        "GPL-2.0",
+        "GPL-3.0"
+    ],
     "autoload": {
-        "classmap": ["src/"]
+        "classmap": [
+            "src/"
+        ]
     },
     "require-dev": {
-        ř
+        "nette/tester": "^1.7"
     }
 }

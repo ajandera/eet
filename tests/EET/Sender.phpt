@@ -52,13 +52,13 @@ class Sender extends TestCase {
     /**
      * Test send error.
      */
-    public function testSendError() {
-        $r = $this->getReceipt();
-        $r->dic_popl = 'x';
-        Assert::exception(function() use ($r) {
-            $this->getSender()->sendReceipt($r);
+    /*public function testSendError() {
+        $receipt = $this->getReceipt();
+        $receipt->dic_popl = 'x';
+        Assert::exception(function() use ($receipt) {
+            $this->getSender()->sendReceipt($receipt);
         }, ServerException::class);
-    }
+    }*/
 
     /**
      * Test get connection time.
