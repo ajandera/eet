@@ -11,7 +11,7 @@ use Ajandera\EET\Receipt;
 use Tester\Assert;
 use Tester\TestCase;
 
-class Sender extends TestCase {
+class TestSender extends TestCase {
 
     /**
      * Create example Sender.
@@ -132,4 +132,4 @@ class Sender extends TestCase {
     }
 }
 
-(new Sender)->run();
+(new TestSender())->run();

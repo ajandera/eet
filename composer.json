@@ -9,9 +9,9 @@
         "GPL-3.0"
     ],
     "autoload": {
-        "classmap": [
-            "src/"
-        ]
+        "psr-0" : {
+            "ajandera/eet" : "src"
+        }
     },
     "require-dev": {
         "nette/tester": "^1.7"
