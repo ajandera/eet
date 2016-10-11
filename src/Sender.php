@@ -52,12 +52,11 @@ class Sender {
     private $soapClient;
 
     /**
-     * @param $service
      * @param string $key
      * @param string $cert
      */
-    public function __construct($service, $key, $cert) {
-        $this->service = $service;
+    public function __construct($key, $cert) {
+        $this->service = __DIR__.'/schema/PlaygroundService.wsdl';
         $this->key = $key;
         $this->cert = $cert;
         $this->checkRequirements();

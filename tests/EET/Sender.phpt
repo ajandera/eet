@@ -19,7 +19,6 @@ class TestSender extends TestCase {
      */
     private function getSender() {
         return new TestedSender(
-            '../../src/Schema/PlaygroundService.wsdl',
             '../../examples/certifications/eet.key',
             '../../examples/certifications/eet.pem'
         );
