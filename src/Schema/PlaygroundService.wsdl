@@ -52,7 +52,7 @@
         2. "443" cislo portu
         Tato adresa plati pouze pro neprodukcni prostredi!
       -->
-      <soap:address location="https://pg.eet.cz:443/eet/services/EETServiceSOAP/v2"/>
+      <soap:address location="https://pg.eet.cz:443/eet/services/EETServiceSOAP/v3"/>
     </wsdl:port>
   </wsdl:service>
   <wsp:Policy wsu:Id="wsp-cd3761cf-7408-48c2-be1b-e6ccf07c68cc">
