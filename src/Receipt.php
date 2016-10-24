@@ -72,4 +72,22 @@ class Receipt {
 
     /** @var int */
     public $rezim = 0;
+
+    /** @var float */
+    public $cest_sluz;
+
+    /** @var  float */
+    public $pouzit_zboz1;
+
+    /** @var float */
+    public $pouzit_zboz2;
+
+    /** @var float */
+    public $pouzit_zboz3;
+
+    /** @var float */
+    public $urceno_cerp_zuct;
+
+    /** @var float */
+    public $cerp_zuct;
 }
