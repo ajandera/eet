@@ -56,7 +56,7 @@ class Sender {
      * @param string $cert
      */
     public function __construct($key, $cert) {
-        $this->service = __DIR__.'/schema/PlaygroundService.wsdl';
+        $this->service = __DIR__.'/PlaygroundService.wsdl';
         $this->key = $key;
         $this->cert = $cert;
         $this->checkRequirements();
@@ -165,12 +165,16 @@ class Sender {
         $this->initSoapClient();
 
         $response = $this->prepareData($receipt, $check);
+        $bkp = $this->getCheckCodes($receipt);
 
         if(isset($response->Chyba)) {
             $this->catchError($response->Chyba);
         }
 
-        return $check ? true : $response->Potvrzeni->fik;
+        return $check ? true : json_encode([
+            'fik' => $response->Potvrzeni->fik,
+            'bkp' => $bkp['bkp']['_']
+        ]);
     }
 
     /**

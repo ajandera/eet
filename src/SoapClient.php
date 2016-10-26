@@ -63,12 +63,12 @@ class SoapClient extends \SoapClient {
     /**
      * @param string $request
      * @param string $location
-     * @param string $saction
+     * @param string $action
      * @param int $version
      * @param null $one_way
      * @return string
      */
-    public function __doRequest($request, $location, $saction, $version, $one_way = NULL) {
+    public function __doRequest($request, $location, $action, $version, $one_way = NULL) {
         $doc = new DOMDocument('1.0');
         $doc->loadXML($request);
 
@@ -76,17 +76,17 @@ class SoapClient extends \SoapClient {
         $objWSSE->addTimestamp();
 
         $objKey = new XMLSecurityKey(XMLSecurityKey::RSA_SHA256, ['type' => 'private']);
-        $objKey->loadKey($this->key, TRUE);
+        $objKey->loadKey($this->key, true);
         $objWSSE->signSoapDoc($objKey, ["algorithm" => XMLSecurityDSig::SHA256]);
 
         $token = $objWSSE->addBinaryToken(file_get_contents($this->cert));
         $objWSSE->attachTokentoSig($token);
 
-        $this->traceRequired && $this->lastResponseStartTime = microtime(TRUE);
+        $this->traceRequired && $this->lastResponseStartTime = microtime(true);
 
-        $response = parent::__doRequest($this->lastRequest = $objWSSE->saveXML(), $location, $saction, $version);
+        $response = parent::__doRequest($this->lastRequest = $objWSSE->saveXML(), $location, $action, $version);
 
-        $this->traceRequired && $this->lastResponseEndTime = microtime(TRUE);
+        $this->traceRequired && $this->lastResponseEndTime = microtime(true);
 
         return $response;
     }
@@ -99,9 +99,10 @@ class SoapClient extends \SoapClient {
     }
 
     /**
+     * @param bool $tillLastRequest
      * @return float
      */
-    public function __getConnectionTime($tillLastRequest = FALSE) {
+    public function __getConnectionTime($tillLastRequest = false) {
         return $tillLastRequest ? $this->getConnectionTimeTillLastRequest() : $this->getConnectionTimeTillNow();
     }
 
