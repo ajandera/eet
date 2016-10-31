@@ -34,7 +34,7 @@ $receipt->dat_trzby = new \DateTime();
 $receipt->celk_trzba = 100;
 
 $sender = new Sender(
-    '../../src/Schema/PlaygroundService.wsdl',
+    '../../src/PlaygroundService.wsdl',
     '../certifications/eet.key',
     '../certifications/eet.pem'
 );

@@ -13,9 +13,9 @@ $receipt->dat_trzby = new \DateTime();
 $receipt->celk_trzba = 100;
 
 $sender = new Sender(
-    '../../src/Schema/PlaygroundService.wsdl',
+    '../../src/PlaygroundService.wsdl',
     '../certifications/eet.key',
     '../certifications/eet.pem'
 );
 
-echo $sender->sendReceipt($receipt); // return FIK code if success
+echo $sender->proceedSend($receipt); // return FIK and BPK code if success
