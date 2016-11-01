@@ -46,7 +46,6 @@ class Sender {
     public $trace;
 
     /**
-     *
      * @var SoapClient
      */
     private $soapClient;
@@ -54,9 +53,10 @@ class Sender {
     /**
      * @param string $key
      * @param string $cert
+     * @param bool $playground
      */
-    public function __construct($key, $cert) {
-        $this->service = __DIR__.'/PlaygroundService.wsdl';
+    public function __construct($key, $cert, $playground = false) {
+        $this->service = $playground ? __DIR__.'/PlaygroundService.wsdl' :  __DIR__.'/ProductionService.wsdl';
         $this->key = $key;
         $this->cert = $cert;
         $this->checkRequirements();
