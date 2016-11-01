@@ -234,6 +234,12 @@ class Sender {
             'dan2' => Strings::price($receipt->dan2),
             'zakl_dan3' => Strings::price($receipt->zakl_dan3),
             'dan3' => Strings::price($receipt->dan3),
+            'cest_sluz' => Strings::price($receipt->cest_sluz),
+            'pouzit_zboz1' => Strings::price($receipt->pouzit_zboz1),
+            'pouzit_zboz2' => Strings::price($receipt->pouzit_zboz2),
+            'pouzit_zboz3' => Strings::price($receipt->pouzit_zboz3),
+            'urceno_cerp_zuct' => Strings::price($receipt->urceno_cerp_zuct),
+            'cerp_zuct' => Strings::price($receipt->cerp_zuct),
             'rezim' => $receipt->rezim
         ];
 
