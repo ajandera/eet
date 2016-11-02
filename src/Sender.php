@@ -173,7 +173,8 @@ class Sender {
 
         return $check ? true : json_encode([
             'fik' => $response->Potvrzeni->fik,
-            'bkp' => $bkp['bkp']['_']
+            'bkp' => $bkp['bkp']['_'],
+            'pkp' => $bkp['pkp']['_']
         ]);
     }
 
