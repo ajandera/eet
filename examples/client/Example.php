@@ -11,11 +11,12 @@ $receipt->id_pokl = '2';
 $receipt->porad_cis = '1';
 $receipt->dat_trzby = new \DateTime();
 $receipt->celk_trzba = 100;
+$receipt->rezim = 1;
 
 $sender = new Sender(
-    '../../src/PlaygroundService.wsdl',
     '../certifications/eet.key',
-    '../certifications/eet.pem'
+    '../certifications/eet.pem',
+    true
 );
 
 echo $sender->proceedSend($receipt); // return FIK and BPK code if success

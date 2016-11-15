@@ -20,7 +20,8 @@ class TestSender extends TestCase {
     private function getSender() {
         return new TestedSender(
             '../../examples/certifications/eet.key',
-            '../../examples/certifications/eet.pem'
+            '../../examples/certifications/eet.pem',
+            true
         );
     }
 
@@ -31,7 +32,7 @@ class TestSender extends TestCase {
     private function getReceipt() {
         $receipt = new Receipt();
         $receipt->uuid_zpravy = 'aa5f94ad-446f-4b15-9a71-1b0235467c1c';
-        $receipt->dic_popl = 'CZ78394560012';
+        $receipt->dic_popl = 'CZ8410063519';
         $receipt->id_provoz = '567';
         $receipt->id_pokl = '2';
         $receipt->porad_cis = '1';
