@@ -73,10 +73,10 @@ class SoapClient extends \SoapClient
         $objWSSE->addTimestamp();
 
         $objKey = new XMLSecurityKey(XMLSecurityKey::RSA_SHA256, ['type' => 'private']);
-        $objKey->loadKey($this->certificates->getPrivateKey(), true);
+        $objKey->loadKey($this->certificates->getPrivateKey());
         $objWSSE->signSoapDoc($objKey, ["algorithm" => XMLSecurityDSig::SHA256]);
 
-        $token = $objWSSE->addBinaryToken(file_get_contents($this->certificates->getCert()));
+        $token = $objWSSE->addBinaryToken($this->certificates->getCert());
         $objWSSE->attachTokentoSig($token);
 
         $this->traceRequired && $this->lastResponseStartTime = microtime(true);
