@@ -12,21 +12,18 @@
 namespace Ajandera\EET;
 
 use DOMDocument;
-use WSSESoap;
-use XMLSecurityDSig;
-use XMLSecurityKey;
+use RobRichards\WsePhp\WSSESoap;
+use RobRichards\XMLSecLibs\XMLSecurityDSig;
+use RobRichards\XMLSecLibs\XMLSecurityKey;
 
 /**
  * Class SoapClient
  * @package Ajandera\EET
  */
-class SoapClient extends \SoapClient {
-
-    /** @var string */
-    private $key;
-
-    /** @var string */
-    private $cert;
+class SoapClient extends \SoapClient
+{
+    /** @var Certificates */
+    private $certificates;
 
     /** @var boolean */
     private $traceRequired;
@@ -45,18 +42,18 @@ class SoapClient extends \SoapClient {
 
     /**
      * @param string $service
-     * @param string $key
-     * @param string $cert
+     * @param Certificates $certificates
      * @param boolean $trace
      */
-    public function __construct($service, $key, $cert, $trace = false) {
+    public function __construct($service, Certificates $certificates, $trace = false) {
         $this->connectionStartTime = microtime(true);
+
         parent::__construct($service, [
             'exceptions' => true,
             'trace' => $trace
         ]);
-        $this->key = $key;
-        $this->cert = $cert;
+
+        $this->certificates = $certificates;
         $this->traceRequired = $trace;
     }
 
@@ -76,10 +73,10 @@ class SoapClient extends \SoapClient {
         $objWSSE->addTimestamp();
 
         $objKey = new XMLSecurityKey(XMLSecurityKey::RSA_SHA256, ['type' => 'private']);
-        $objKey->loadKey($this->key, true);
+        $objKey->loadKey($this->certificates->getPrivateKey(), true);
         $objWSSE->signSoapDoc($objKey, ["algorithm" => XMLSecurityDSig::SHA256]);
 
-        $token = $objWSSE->addBinaryToken(file_get_contents($this->cert));
+        $token = $objWSSE->addBinaryToken(file_get_contents($this->certificates->getCert()));
         $objWSSE->attachTokentoSig($token);
 
         $this->traceRequired && $this->lastResponseStartTime = microtime(true);

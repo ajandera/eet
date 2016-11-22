@@ -15,7 +15,8 @@ namespace Ajandera\EET;
  * Class Strings
  * @package Ajandera\EET
  */
-class Strings {
+class Strings
+{
 
     /**
      * Format price to valid format

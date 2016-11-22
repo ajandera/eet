@@ -2,8 +2,9 @@
 
 namespace Ajandera\EET\Test;
 
-require_once '../../vendor/autoload.php';
+require_once __DIR__ . '/../../vendor/autoload.php';
 
+use Ajandera\EET\Certificates;
 use Ajandera\EET\Sender as TestedSender;
 use Ajandera\EET\Exceptions\ClientException;
 use Ajandera\EET\Exceptions\ServerException;
@@ -19,8 +20,7 @@ class TestSender extends TestCase {
      */
     private function getSender() {
         return new TestedSender(
-            '../../examples/certifications/eet.key',
-            '../../examples/certifications/eet.pem',
+            new Certificates(__DIR__.'/../../examples/certifications/EET_CA1_Playground-CZ00000019.p12', 'eet'),
             true
         );
     }
@@ -32,9 +32,9 @@ class TestSender extends TestCase {
     private function getReceipt() {
         $receipt = new Receipt();
         $receipt->uuid_zpravy = 'aa5f94ad-446f-4b15-9a71-1b0235467c1c';
-        $receipt->dic_popl = 'CZ8410063519';
-        $receipt->id_provoz = '567';
-        $receipt->id_pokl = '2';
+        $receipt->dic_popl = 'CZ1212121218';
+        $receipt->id_provoz = '11';
+        $receipt->id_pokl = 'IP105';
         $receipt->porad_cis = '1';
         $receipt->dat_trzby = new \DateTime();
         $receipt->celk_trzba = 100;

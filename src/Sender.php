@@ -14,7 +14,7 @@ namespace Ajandera\EET;
 use Ajandera\EET\Exceptions\ClientException;
 use Ajandera\EET\Exceptions\RequirementsException;
 use Ajandera\EET\Exceptions\ServerException;
-use XMLSecurityKey;
+use RobRichards\XMLSecLibs\XMLSecurityKey;
 
 /**
  * Class Sender
@@ -23,16 +23,9 @@ use XMLSecurityKey;
 class Sender {
 
     /**
-     * Certificate key
-     * @var string
+     * @var Certificates
      */
-    private $key;
-
-    /**
-     * Certificate
-     * @var string
-     */
-    private $cert;
+    private $certificates;
 
     /**
      * WSDL path or URL
@@ -51,14 +44,12 @@ class Sender {
     private $soapClient;
 
     /**
-     * @param string $key
-     * @param string $cert
+     * @param Certificates $certificates
      * @param bool $playground
      */
-    public function __construct($key, $cert, $playground = false) {
+    public function __construct(Certificates $certificates, $playground = false) {
         $this->service = $playground ? __DIR__.'/PlaygroundService.wsdl' :  __DIR__.'/ProductionService.wsdl';
-        $this->key = $key;
-        $this->cert = $cert;
+        $this->certificates = $certificates;
         $this->checkRequirements();
     }
 
@@ -127,7 +118,7 @@ class Sender {
      */
     public function getCheckCodes(Receipt $receipt) {
         $objKey = new XMLSecurityKey(XMLSecurityKey::RSA_SHA256, ['type' => 'private']);
-        $objKey->loadKey($this->key, true);
+        $objKey->loadKey($this->certificates->getPrivateKey());
 
         $arr = [
             $receipt->dic_popl,
@@ -137,6 +128,7 @@ class Sender {
             $receipt->dat_trzby->format('c'),
             Strings::price($receipt->celk_trzba)
         ];
+
         $sign = $objKey->signData(join('|', $arr));
 
         return [
@@ -202,7 +194,9 @@ class Sender {
      * @return void
      */
     private function initSoapClient() {
-        $this->soapClient = new SoapClient($this->service, $this->key, $this->cert, $this->trace);
+        if ($this->soapClient === null) {
+            $this->soapClient = new SoapClient($this->service, $this->certificates, $this->trace);
+        }
     }
 
     /**

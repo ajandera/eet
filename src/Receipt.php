@@ -14,7 +14,8 @@ namespace Ajandera\EET;
 /**
  * Receipt for Ministry of Finance
  */
-class Receipt {
+class Receipt
+{
 
     /**
      * Head part: message identifier
