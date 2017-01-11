@@ -16,7 +16,7 @@ use Ajandera\EET\Exceptions\ClientException;
 /**
  * Pars PKCS#12 and store X.509
  */
-class   Certificates
+class Certificates
 {
     /** @var string */
     private $privateKey;
