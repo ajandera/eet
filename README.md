@@ -34,9 +34,8 @@ $receipt->dat_trzby = new \DateTime();
 $receipt->celk_trzba = 100;
 
 $sender = new Sender(
-    '../../src/PlaygroundService.wsdl',
-    '../certifications/eet.key',
-    '../certifications/eet.pem'
+    new Certificates(__DIR__.'/../../examples/certifications/EET_CA1_Playground-CZ00000019.p12', 'eet'),
+    true
 );
 
 echo $sender->sendReceipt($receipt); // return FIK code if success
